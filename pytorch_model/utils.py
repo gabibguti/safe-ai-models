@@ -8,6 +8,9 @@ import requests
 from sklearn.model_selection import train_test_split
 import pickle
 import os
+from safetensors.torch import save_file
+from huggingface_hub import HfApi
+from huggingface_hub import PyTorchModelHubMixin
 
 
 # Create a Model Class that inherits nn.Module
@@ -30,8 +33,25 @@ class FlowerPredictionModel(nn.Module):
     return x
   
   # Dangerous Pickle deserialization
-  # def __reduce__(self):
-  #     return (os.system, ("echo 'YOU HAVE BEEN PWNED'",))
+  def __reduce__(self):
+      return (os.system, ("echo 'YOU HAVE BEEN PWNED'",))
+
+class FlowerPredictionModel(
+        nn.Module,
+        PyTorchModelHubMixin
+    ):
+  def __init__(self, in_features=4, h1=8, h2=9, out_features=3):
+    super().__init__() # instantiate our nn.Module
+    self.fc1 = nn.Linear(in_features, h1)
+    self.fc2 = nn.Linear(h1, h2)
+    self.out = nn.Linear(h2, out_features)
+
+  def forward(self, x):
+    x = F.relu(self.fc1(x))
+    x = F.relu(self.fc2(x))
+    x = self.out(x)
+
+    return x
 
 # Train the FlowerPredictionModel
 def TrainFlowerPredictionModel(model: FlowerPredictionModel):
@@ -124,6 +144,8 @@ def EvaluteFlowerPreditionModel(model: FlowerPredictionModel, X_test, y_test):
 def SaveFlowerPredictionModel(model: FlowerPredictionModel):
   print ("# Creating our model binary...")
 
+  ### Save model to PyTorch Hub
+
   # Dangerous save 1
   # pickle.dump(model, open("pytorch_model/flower_prediction_model.pkl", "wb"))
 
@@ -137,6 +159,11 @@ def SaveFlowerPredictionModel(model: FlowerPredictionModel):
   # pickle.dump(model.state_dict(), open("pytorch_model/flower_prediction_model.pt", "wb"))
 
   # Safe save 2
-  torch.save(model.state_dict(), 'pytorch_model/flower_prediction_model.pt')
+  # torch.save(model.state_dict(), 'pytorch_model/flower_prediction_model.pt')
+
+  ### Save model to HuggingFace
+
+  model.save_pretrained("flower-prediction-model-hf")
+  model.push_to_hub("flower-prediction-model-hf")
 
   print ("# Binary created.")
