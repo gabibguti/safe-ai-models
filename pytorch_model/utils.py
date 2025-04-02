@@ -30,8 +30,8 @@ class FlowerPredictionModel(nn.Module):
     return x
   
   # Dangerous Pickle deserialization
-  def __reduce__(self):
-      return (os.system, ("echo 'YOU HAVE BEEN PWNED'",))
+  # def __reduce__(self):
+  #     return (os.system, ("echo 'YOU HAVE BEEN PWNED'",))
 
 # Train the FlowerPredictionModel
 def TrainFlowerPredictionModel(model: FlowerPredictionModel):
@@ -131,12 +131,12 @@ def SaveFlowerPredictionModel(model: FlowerPredictionModel):
   # pickle.dump(model, open("pytorch_model/flower_prediction_model.pt", "wb"))
 
   # Dangerous save 3
-  torch.save(model, 'pytorch_model/flower_prediction_model.pt')
+  # torch.save(model, 'pytorch_model/flower_prediction_model.pt')
 
   # Safe save 1
   # pickle.dump(model.state_dict(), open("pytorch_model/flower_prediction_model.pt", "wb"))
 
   # Safe save 2
-  # torch.save(model.state_dict(), 'pytorch_model/flower_prediction_model.pt')
+  torch.save(model.state_dict(), 'pytorch_model/flower_prediction_model.pt')
 
   print ("# Binary created.")
