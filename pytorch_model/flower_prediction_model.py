@@ -1,6 +1,8 @@
+import torch
 from .utils import FlowerPredictionModel
+from typing import Any
 
-def flower_prediction_model(*, progress: bool = True) -> FlowerPredictionModel:
+def flower_prediction_model(*, progress: bool = True, **kwargs: Any) -> FlowerPredictionModel:
     """FlowerPredictionModel is a test purpose model. The model can predict iris flowers
     (Setosa, Versicolor, Virginica) based off their specifications:
     - Sepal length
