@@ -5,6 +5,7 @@ cycler==0.12.1
 filelock==3.18.0
 fonttools==4.56.0
 fsspec==2025.3.2
+huggingface-hub==0.30.1
 idna==3.10
 Jinja2==3.1.6
 joblib==1.4.2
@@ -20,13 +21,19 @@ pillow==11.2.0
 pyparsing==3.2.3
 python-dateutil==2.9.0.post0
 pytz==2025.2
+PyYAML==6.0.2
+regex==2024.11.6
 requests==2.32.3
+safetensors==0.5.3
 scikit-learn==1.6.1
 scipy==1.15.2
 six==1.17.0
 sympy==1.13.1
 threadpoolctl==3.6.0
+tokenizers==0.21.1
 torch==2.6.0
+tqdm==4.67.1
+transformers==4.50.3
 typing_extensions==4.13.0
 tzdata==2025.2
 urllib3==2.3.0

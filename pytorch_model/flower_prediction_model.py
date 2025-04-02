@@ -1,6 +1,7 @@
 import torch
 from .utils import FlowerPredictionModel
 from typing import Any
+from transformers import AutoModel
 
 def flower_prediction_model(*, progress: bool = True, **kwargs: Any) -> FlowerPredictionModel:
     """FlowerPredictionModel is a test purpose model. The model can predict iris flowers
@@ -20,6 +21,8 @@ def flower_prediction_model(*, progress: bool = True, **kwargs: Any) -> FlowerPr
     # https://pytorch.org/docs/stable/generated/torch.load.html#torch-load
     # https://pytorch.org/tutorials/beginner/saving_loading_models.html#save-load-state-dict-recommended
 
+    ### PICKLES
+
     # Load from Dangerous save 1
     # model.load_state_dict(torch.load("pytorch_model/flower_prediction_model.pkl", weights_only=False))
 
@@ -28,6 +31,11 @@ def flower_prediction_model(*, progress: bool = True, **kwargs: Any) -> FlowerPr
 
     # Load from Safe save 1 or 2
     # model.load_state_dict(torch.load("pytorch_model/flower_prediction_model.pt", weights_only=False))
-    model.load_state_dict(torch.load("pytorch_model/flower_prediction_model.pt", weights_only=True))
+    # model.load_state_dict(torch.load("pytorch_model/flower_prediction_model.pt", weights_only=True))
+
+    ### SAFETENSORS
+
+    # model.load_state_dict(torch.load("pytorch_model/flower_prediction_model.safetensors"))
+    model = AutoModel.from_pretrained("pytorch_model/flower_prediction_model.safetensors", use_safetensors=True)
 
     return model

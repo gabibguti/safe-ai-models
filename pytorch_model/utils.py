@@ -8,6 +8,7 @@ import requests
 from sklearn.model_selection import train_test_split
 import pickle
 import os
+from safetensors.torch import save_file
 
 
 # Create a Model Class that inherits nn.Module
@@ -124,6 +125,8 @@ def EvaluteFlowerPreditionModel(model: FlowerPredictionModel, X_test, y_test):
 def SaveFlowerPredictionModel(model: FlowerPredictionModel):
   print ("# Creating our model binary...")
 
+  ### PICKLES (.pkl, .pt, .pth)
+
   # Dangerous save 1
   # pickle.dump(model, open("pytorch_model/flower_prediction_model.pkl", "wb"))
 
@@ -137,6 +140,11 @@ def SaveFlowerPredictionModel(model: FlowerPredictionModel):
   # pickle.dump(model.state_dict(), open("pytorch_model/flower_prediction_model.pt", "wb"))
 
   # Safe save 2
-  torch.save(model.state_dict(), 'pytorch_model/flower_prediction_model.pt')
+  # torch.save(model.state_dict(), 'pytorch_model/flower_prediction_model.pt')
+
+  ### SAFETENSORS
+  # for tp in model.state_dict():
+  #    tp.second
+  save_file(model.state_dict(), 'pytorch_model/flower_prediction_model.safetensors')
 
   print ("# Binary created.")
