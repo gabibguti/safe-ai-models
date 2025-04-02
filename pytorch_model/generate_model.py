@@ -1,5 +1,5 @@
 import torch
-from utils import FlowerPredictionModel, TrainFlowerPredictionModel, EvaluteFlowerPreditionModel, SaveFlowerPredictionModel
+from .utils import FlowerPredictionModel, TrainFlowerPredictionModel, EvaluteFlowerPreditionModel, SaveFlowerPredictionModel
 
 # Pick a manual seed for randomization
 torch.manual_seed(41)
