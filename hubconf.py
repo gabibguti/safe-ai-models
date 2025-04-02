@@ -1,3 +1,3 @@
 dependencies = ["torch"]
 
-from pytorch_model.pytorch_model import flower_prediction_model
+from pytorch_model.flower_prediction_model import flower_prediction_model

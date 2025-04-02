@@ -21,3 +21,20 @@ pip freeze > requirements.txt
 # Install dependencies
 pip install -r requirements.txt
 ```
+
+## Troubleshooting
+
+### SSL: CERTIFICATE_VERIFY_FAILED
+OS: macOS
+Error:
+```
+ssl.SSLCertVerificationError: [SSL: CERTIFICATE_VERIFY_FAILED] certificate verify failed: unable to get local issuer certificate (_ssl.c:1006)
+```
+Fix:
+```
+/Applications/Python\ 3.11/Install\ Certificates.command 
+ -- pip install --upgrade certifi
+```
+
+### Torch Hub Load GitHub Repository Not Found
+The repository must be public for it to be visible for Torch Hub Load.
