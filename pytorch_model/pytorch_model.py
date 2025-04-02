@@ -5,7 +5,7 @@ import torch.nn.functional as F
 print ("# Creating flower prediction model...")
 
 # Create a Model Class that inherits nn.Module
-class Model(nn.Module):
+class FlowerPredictionModel(nn.Module):
   # Input layer (4 features of the flower) -->
   # Hidden Layer1 (number of neurons) -->
   # H2 (n) -->
@@ -26,7 +26,7 @@ class Model(nn.Module):
 # Pick a manual seed for randomization
 torch.manual_seed(41)
 # Create an instance of model
-model = Model()
+model = FlowerPredictionModel()
 
 print ("# Model created.")
 
@@ -121,6 +121,24 @@ print ("# Model validated.")
 print ("# Creating our model binary...")
 
 # Save our NN Model
-# torch.save(model.state_dict(), 'flower_prediction_model.pt')
+torch.save(model.state_dict(), 'flower_prediction_model.pt')
 
 print ("# Binary created.")
+
+@register_model()
+def flower_prediction_model(*, progress: bool = True) -> FlowerPredictionModel:
+    """FlowerPredictionModel is a test purpose model. The model can predict iris flowers
+    (Setosa, Versicolor, Virginica) based off their specifications:
+    - Sepal length
+    - Sepal width
+    - Petal length
+    - Petal width
+
+    Args:
+        progress (bool, optional): If True, displays a progress bar of the
+            download to stderr. Default is True.
+    """
+
+    model = FlowerPredictionModel(**kwargs)
+    model.load_state_dict(torch.load("flower_prediction_model.pt"))
+    return model
