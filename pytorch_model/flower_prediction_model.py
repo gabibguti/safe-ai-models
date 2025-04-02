@@ -1,4 +1,4 @@
-from pytorch_model import FlowerPredictionModel
+from utils import FlowerPredictionModel
 
 def flower_prediction_model(*, progress: bool = True) -> FlowerPredictionModel:
     """FlowerPredictionModel is a test purpose model. The model can predict iris flowers
