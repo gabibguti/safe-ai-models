@@ -16,5 +16,14 @@ def flower_prediction_model(*, progress: bool = True, **kwargs: Any) -> FlowerPr
     """
 
     model = FlowerPredictionModel(**kwargs)
-    model.load_state_dict(torch.load("pytorch_model/flower_prediction_model.pt"))
+
+    # Load from Dangerous save 1
+    # model.load_state_dict(torch.load("pytorch_model/flower_prediction_model.pkl", weights_only=False))
+
+    # Load from Dangerous save 2
+    # model.load_state_dict(torch.load("pytorch_model/flower_prediction_model.pt", weights_only=False))
+
+    # Load from Dangerous save 3
+    model = torch.load("pytorch_model/flower_prediction_model.pt", weights_only=False)
+
     return model
