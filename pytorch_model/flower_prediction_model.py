@@ -16,5 +16,5 @@ def flower_prediction_model(*, progress: bool = True, **kwargs: Any) -> FlowerPr
     """
 
     model = FlowerPredictionModel(**kwargs)
-    model.load_state_dict(torch.load("flower_prediction_model.pt"))
+    model.load_state_dict(torch.load("pytorch_model/flower_prediction_model.pt"))
     return model
