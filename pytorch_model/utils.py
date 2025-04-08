@@ -31,8 +31,8 @@ class FlowerPredictionModel(nn.Module):
     return x
   
   # Dangerous Pickle deserialization
-  def __reduce__(self):
-      return (os.system, ("echo 'YOU HAVE BEEN PWNED'",))
+  # def __reduce__(self):
+  #     return (os.system, ("echo 'YOU HAVE BEEN PWNED'",))
 
 # FlowerPredictionModel for HuggingFace 
 # class FlowerPredictionModel(
@@ -146,7 +146,8 @@ def SaveFlowerPredictionModel(model: FlowerPredictionModel):
   ### Save model to PyTorch Hub
 
   # Dangerous save 1
-  pickle.dump(model, open("pytorch_model/flower_prediction_model.pkl", "wb"))
+  # pickle.dump(model, open("pytorch_model/flower_prediction_model.pkl", "wb"))
+  torch.save(model, 'pytorch_model/flower_prediction_model.pkl')
 
   # Dangerous save 2
   # pickle.dump(model, open("pytorch_model/flower_prediction_model.pt", "wb"))
