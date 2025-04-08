@@ -12,7 +12,7 @@ python -m venv .venv
 source .venv/bin/activate
 ```
 
-### Install dependencies
+## Install dependencies
 ```bash
 # Install new dependency
 pip install <package>
@@ -20,6 +20,22 @@ pip install <package>
 pip freeze > requirements.txt
 # Install dependencies
 pip install -r requirements.txt
+```
+
+## Test
+
+### PyTorch Hub
+```bash
+python -m pytorch_model.generate_model
+python -m fetch_flower_prediction_model
+```
+To test different save and loads, you must generate the new binary, point the load to your binary, and upload all configurations to GitHub. Then run the prediction.
+
+### HuggingFace
+First, uncomment save and fetch from HuggingFace, then run:
+```bash
+python -m pytorch_model.generate_model
+python -m fetch_flower_prediction_model
 ```
 
 ## Troubleshooting
